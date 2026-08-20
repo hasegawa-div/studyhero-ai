@@ -98,6 +98,14 @@ def init_db():
         """)
     except:
         pass
+    try:
+        cursor.execute("""
+        ALTER TABLE users
+        ADD COLUMN plan TEXT DEFAULT 'free'
+        """)
+    except:
+        pass
+
     conn.commit()
     conn.close()
 @app.route("/")
