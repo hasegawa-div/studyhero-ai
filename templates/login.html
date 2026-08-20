@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>StudyHero AI</h1>
+    <p>アカウントをお持ちでない方は
+        <a href="{{ url_for('register') }}">新規登録はこちら</a>
+    </p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="flash">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="{{ url_for('login') }}" method="POST">
+        <p>ユーザー名</p>
+
+        <input type="text"
+        name="username"
+        placeholder="ユーザー名を入力">
+
+        <p>パスワード</p>
+        
+        <input 
+        type="password"
+        name="password"
+        placeholder="パスワードを入力">
+
+        <br><br>
+
+        <button type="submit">ログイン</button>
+
+    </form>
+    
+</body>
+</html>

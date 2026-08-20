@@ -1,0 +1,492 @@
+body {
+    background-color: #f5f7fb;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: #2c7be5;
+    margin-top: 100px;
+}
+
+p {
+    font-size: 20px;
+}
+
+button {
+      background:#2c7be5;
+    color:white;
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(44,123,229,.3);
+}
+
+button:active{
+    transform:scale(.98);
+}
+.card{
+    flex: 1;
+    min-width: 220px;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    color: #333;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    transition:.25s;
+    background: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,.15)
+}
+.cards {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.today{
+    background: linear-gradient(135deg,#4facfe,#00c6fb);
+}
+
+.week{
+    background: linear-gradient(135deg,#43e97b,#38f9d7);
+}
+
+.month{
+    background: linear-gradient(135deg,#fa709a,#fee140);
+}
+
+.total{
+    background: linear-gradient(135deg,#667eea,#764ba2);
+}
+
+.card h2{
+    margin-bottom: 15px;
+}
+
+.card h1{
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+}
+.ranking-card{
+    text-align: left;
+}
+.heatmap {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.heatmap td,
+.heatmap th {
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+.level0{
+    background:#ffffff;
+}
+
+.level1{
+    background:#c6f6c6;
+}
+
+.level2{
+    background:#7ee787;
+}
+
+.level3{
+    background:#2ea043;
+    color:white;
+}
+
+.level4{
+    background:#0e4429;
+    color:white;
+}
+
+
+.sidebar h2{
+    color: white;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover{
+    background: #34495e;
+}
+
+
+
+
+/* ハンバーガーボタン */
+.menu-button{
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+    text-align: left;
+    
+}
+
+/* サイドバー */
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: -250px;      /* 最初は隠す */
+    width: 250px;
+    height: 100vh;
+    background: #2c3e50;
+    transition: 0.3s;
+    padding-top: 70px;
+    z-index: 1000;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 開いた状態 */
+.sidebar.open{
+    left: 0;
+}
+
+/* メニュー */
+.sidebar a{
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+}
+
+.sidebar a:hover{
+    background: #34495e;
+}
+
+/* メイン画面 */
+.main{
+    padding: 30px;
+}
+.dashboard-row{
+    display:flex;
+    gap:30px;
+    margin:30px 0;
+    align-items:flex-start;
+}
+
+.ranking-card,
+.goal-card{
+    flex:1;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.goal-list{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.goal-list .card{
+    width: 250px;
+}
+.chart-card{
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin: 30px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+}
+.chart-container{
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+.streak-card{
+    background: linear-gradient(135deg,#ff9a44,#fc6076);
+    color: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin: 30px 0;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.streak-card h1{
+    font-size: 60px;
+    margin: 10px 0;
+}
+
+.streak-card p{
+    font-size: 18px;
+    margin: 0;
+}
+.level-card{
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin: 30px 0;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.level-card progress{
+    width: 100%;
+    height: 20px;
+}
+
+.level-card h1,
+.level-card h2{
+    margin-bottom: 10px;
+}
+.ai-card{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.ai-character{
+    font-size: 80px;
+}
+
+.ai-message{
+    flex: 1;
+}
+
+.ai-message h2{
+    margin-top: 0;
+}
+.ai-card{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.speech{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    position:relative;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.speech::before{
+    content:"";
+    position:absolute;
+    left:-12px;
+    top:30px;
+    border:12px solid transparent;
+    border-right-color:white;
+}
+.plan-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.plan-card.done {
+    background: #d4edda;
+    border-left: 6px solid #28a745;
+}
+
+.plan-card:hover {
+    transform: translateY(-2px);
+}
+.my-rank{
+    background: #fff3cd;
+    font-weight: bold;
+}
+.ranking-card{
+    background:white;
+    border-radius:15px;
+    padding:20px;
+    margin:15px 0;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+    text-align:center;
+}
+
+.rank-icon{
+    font-size:40px;
+}
+
+.my-rank{
+    border:3px solid #FFD700;
+}
+.ranking-menu{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:20px 0;
+}
+
+.ranking-menu a{
+    padding:8px 15px;
+    border-radius:20px;
+    background:#4CAF50;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.ranking-menu a:hover{
+    opacity:0.8;
+}
+.ranking-menu a.active{
+    background:#FFD700;
+    color:black;
+}
+.flash {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.message{
+    color:red;
+    font-weight:bold;
+    margin:10px 0;
+}
+.profile-image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #6a5acd;
+    display: block;
+    margin: 20px auto;
+}
+input,
+select,
+textarea{
+    width:100%;
+    max-width:350px;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+    margin:8px 0;
+    box-sizing:border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    outline:none;
+    border-color:#2c7be5;
+    box-shadow:0 0 8px rgba(44,123,229,.2);
+}
+.today h1{
+    font-size:40px;
+}
+.today h2{
+    font-size:20px;
+}
+.ai-character{
+    font-size:100px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-8px);}
+    100%{transform:translateY(0);}
+}
+@media (max-width: 768px){
+
+    .cards{
+        flex-direction: column;
+    }
+
+    .dashboard-row{
+        flex-direction: column;
+    }
+
+    .goal-list{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .goal-list .card{
+        width: 100%;
+        max-width: 350px;
+    }
+
+}
+@media (max-width:768px){
+
+    .main{
+        padding:15px;
+    }
+
+}
+@media (max-width:768px){
+
+    .chart-container{
+        height:250px;
+    }
+
+}
+@media (max-width:768px){
+
+    button{
+        width:100%;
+        margin:8px 0;
+    }
+
+}
+.password-rule{
+    max-width: 350px;
+    margin: 10px auto 20px;
+    padding: 12px;
+    background: #eef5ff;
+    border-left: 4px solid #2c7be5;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+}
+
+.password-rule strong{
+    display: block;
+    margin-bottom: 8px;
+}
+
+.password-rule ul{
+    margin: 0;
+    padding-left: 20px;
+}
+
+.password-rule li{
+    margin-bottom: 4px;
+}

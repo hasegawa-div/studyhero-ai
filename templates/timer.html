@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>⏱️ 勉強タイマー</h2>
+
+<div class="timer-container">
+
+    <label>科目</label><br>
+    <input type="text" id="subject" placeholder="例：Python">
+
+    <br><br>
+
+    <label>時間（分）</label><br>
+    <input type="number" id="minutes" value="25" min="1" max="300">
+
+    <br><br>
+
+    <h1 id="timer">25:00</h1>
+
+    <button onclick="startTimer()">▶️ 開始</button>
+    <button onclick="pauseTimer()">⏸️ 一時停止</button>
+    <button onclick="resetTimer()">🔄 リセット</button>
+
+</div>
+
+<script>
+
+let time = 0;
+let interval = null;
+
+function updateDisplay() {
+
+    let minutes = Math.floor(time / 60);
+    let seconds = time % 60;
+
+    document.getElementById("timer").innerText =
+        String(minutes).padStart(2, "0") + ":" +
+        String(seconds).padStart(2, "0");
+}
+
+function startTimer() {
+
+    if (interval) return;
+
+    if (time === 0) {
+        let inputMinutes = parseInt(document.getElementById("minutes").value);
+
+        if (isNaN(inputMinutes) || inputMinutes <= 0) {
+            alert("時間を入力してください");
+            return;
+        }
+
+        time = inputMinutes * 60;
+        updateDisplay();
+    }
+
+    interval = setInterval(function () {
+
+        if (time > 0) {
+
+            time--;
+            updateDisplay();
+
+        } else {
+             clearInterval(interval);
+             interval = null;
+             
+             let subject = document.getElementById("subject").value || "未設定";
+             
+             let minutes = parseInt(document.getElementById("minutes").value);
+             
+             if (confirm("🎉 " + subject + " を " + minutes + "分勉強しました！\n記録しますか？")) {
+
+                location.href =
+                "/timer_record?subject=" + 
+                encodeURIComponent(subject) +
+                "&minutes=" + minutes;
+
+            }
+
+        }
+
+    }, 1000);
+}
+
+function pauseTimer() {
+
+    clearInterval(interval);
+    interval = null;
+
+}
+
+function resetTimer() {
+
+    clearInterval(interval);
+    interval = null;
+
+    let inputMinutes = parseInt(document.getElementById("minutes").value);
+
+    if (isNaN(inputMinutes) || inputMinutes <= 0) {
+        inputMinutes = 25;
+    }
+
+    time = inputMinutes * 60;
+
+    updateDisplay();
+
+}
+
+resetTimer();
+
+</script>
+
+{% endblock %}

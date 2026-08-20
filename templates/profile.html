@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>👤 プロフィール</h2>
+
+{% if user["profile_image"] %}
+    <img src="{{ url_for('static', filename='uploads/' + user['profile_image']) }}"
+         width="150"
+         style="border-radius: 50%;">
+{% endif %}
+  
+<p><strong>ユーザー名：</strong>{{ user["username"] }}</p>
+
+<p><strong>自己紹介</strong></p>
+
+<hr>
+
+<h3>📊 勉強実績</h3>
+
+<p>📅 今日：{{ today_minutes }} 分</p>
+
+<p>📆 今週：{{ week_minutes }} 分</p>
+
+<p>📚 合計：{{ total_minutes }} 分</p>
+
+<p>🔥 ストリーク：{{ streak }} 日</p>
+
+<p>
+    {% if user["bio"] %}
+        {{ user["bio"] }}
+    {% else %}
+        まだ自己紹介はありません。
+    {% endif %}
+</p>
+
+<a href="{{ url_for('edit_profile') }}">✏️ プロフィールを編集</a>
+
+{% endblock %}

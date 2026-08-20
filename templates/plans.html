@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>📅 予定一覧</h1>
+
+<form method="POST">
+
+    <p>日付</p>
+    <input type="date" name="date" required>
+
+
+    <p>科目</p>
+    <input type="text" name="subject" required>
+
+    <p>予定時間（分）</p>
+    <input type="number" name="minutes" required>
+
+    <br><br>
+
+    <button type="submit">追加</button>
+
+</form>
+
+<hr>
+
+<h2>今日の予定一覧</h2>
+
+{% if plans %}
+    
+    {% set ns = namespace(last_date='') %}
+
+    {% for plan in plans %}
+
+        {% if plan[1] != ns.last_date %}
+            <h2>📅 {{ plan[1] }}</h2>
+            {% set ns.last_date = plan[1] %}
+    {% endif %}
+
+    <div class="plan-card {% if plan[4] == 1 %}done{% endif %}">
+        <strong>{{ plan[2] }}</strong> <br>
+        {{ plan[3] }}分<br><br>
+    
+        {% if plan[4] == 0 %}
+            <a href="{{ url_for('add_record', plan_id=plan[0]) }}">
+                <button>📚 勉強記録を追加</button>
+            </a>
+        {% else %}
+            ✅ 完了
+        {% endif %}
+        <a href="{{ url_for('edit_plan', plan_id=plan[0]) }}">
+            <button>✏️ 編集</button>
+        </a>
+        <a href="{{ url_for('delete_plan', plan_id=plan[0]) }}"
+            onclick="return confirm('この予定を削除しますか？')">
+            <button>🗑️ 削除</button>
+        </a>
+    </div>
+{% endfor %}
+
+{% else %}
+
+<p>今日はまだ予定がありません。</p>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>勉強記録</h2>
+
+<table border="1">
+    <tr>
+        <th>日付</th>
+        <th>科目</th>
+        <th>時間（分）</th>
+    </tr>
+
+    {% for record in records %}
+    <tr>
+        <td>{{ record[1] }}</td>
+        <td>{{ record[2] }}</td>
+        <td>{{ record[3] }}</td>
+        <td>
+            <a href="{{ url_for('edit_record', record_id=record[0]) }}">
+                <button>編集</button>
+            </a>
+
+            <a href="{{ url_for('delete_record', record_id=record[0]) }}">
+                <button>削除</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

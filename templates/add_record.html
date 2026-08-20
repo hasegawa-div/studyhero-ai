@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>勉強記録追加</h1>
+
+<form method="POST">
+    <p>科目</p>
+    <input type="text"
+     name="subject" 
+     placeholder="科目を入力"
+     required>
+    <p>勉強時間（分）</p>
+    <input type="number"
+     name="minutes" 
+     placeholder="時間を入力"
+     required>
+
+    <br><br>
+
+    <button type="submit">保存</button>
+
+</form>
+{% endblock %}   

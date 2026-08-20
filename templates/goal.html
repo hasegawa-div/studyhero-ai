@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>🎯 科目別目標</h1>
+<form method="POST">
+    <label>科目</label><br>
+    <input type="text" name="subject" required><br><br>
+
+    <label>目標時間（分）</label><br>
+    <input type="number" name="goal_minutes" required><br><br>
+    <button type="submit">保存</button>
+
+</form>
+
+<h2>現在の目標</h2>
+
+<ul>
+{% for subject, goal in goals %}
+    <li>{{subject}} : {{goal}}分</li>
+{% endfor %}
+</ul>
+    
+{% endblock %}

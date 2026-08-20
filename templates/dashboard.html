@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>StudyHero AI</h1>
+<p>{{username}}さん、ログイン中です！</p>
+<div class="ai-card">
+
+    <div class="ai-character">
+        {{ character }}
+    </div>
+    <div class="ai-message">
+        <p>{{ advice }}</p>
+    </div>
+
+</div>
+<h2>📅 今日の予定</h2>
+
+{% if today_plans %}
+    <ul>
+    {% for plan in today_plans %}
+    <div class="plan-card {% if plan[2] == 1 %}done{% endif %}">
+        <strong>{{ plan[0] }}</strong><br>
+        {{ plan[1] }}分
+    </div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>今日の予定はありません！</p>
+{% endif %}
+<div class="streak-card">
+    <h2>🔥 連続勉強日数</h2>
+
+    <h1>{{ streak }}日</h1>
+
+    {% if streak == 0 %}
+        <p>今日勉強するとストリーク開始！</p>
+    {% elif streak < 7 %}
+        <p>あと{{ 7 - streak }}日で7日達成！</p>
+    {% elif streak < 30 %}
+        <p>🎉 7日連続達成！次は30日を目指そう！</p>
+    {% else %}
+        <p>🏆 30日以上継続中！素晴らしい！</p>
+    {% endif %}
+</div>
+<div class="card">
+    <h2>StudyHero</h2>
+
+    <h1 style="font-size:70px;">
+        {{ character }}
+    </h1>
+
+    <p>レベル {{ level }}</p>
+</div>
+<div class="level-card">
+    <h2>⭐ レベル {{ level }}</h2>
+
+    <p>経験値：{{ exp }}分</p>
+
+    <progress value="{{ progress }}" max="100"></progress>
+
+    <p>次のレベルまであと {{ remain }} 分</p>
+</div>
+<div class="cards">
+    <div class="card today">
+        <h2>📅  今日</h2>
+        <h1>{{ today_minutes }} 分</h1>
+    </div>
+    <div class="card week">
+        <h2>📆 今週</h2>
+        <h1>{{ week_minutes }} 分</h1>
+    </div>
+    <div class="card month">
+        <h2>🗓️ 今月</h2>
+        <h1>{{ month_minutes }} 分</h1>
+    </div>
+    <div class="card total">
+        <h2>📚 合計</h2>
+        <h1>{{ total_minutes }}分</h1>
+    </div>
+</div>
+<div class="dashboard-row">
+    <div class="ranking-card">
+            <h2>🏆 科目ランキング</h2>
+
+            <ul>
+            {% for subject, minutes in ranking %}
+                <li>
+                    {% if loop.index == 1 %}
+                        🥇
+                    {% elif loop.index == 2 %}
+                        🥈
+                    {% elif loop.index == 3 %}
+                        🥉
+                    {% endif %}
+
+                    {{ subject }} - {{ minutes }}分
+                </li>
+            {% endfor %}
+            </ul>
+    </div>
+    <div class="goal-card">
+        <h2>🎯 目標達成率</h2>
+        <div class="goal-list">
+            {% for subject, studied, goal, percent in goal_progress %}
+
+            <div class="card">
+                <h3>{{ subject }}</h3>
+
+                <p>{{studied}} / {{goal}}分</p>
+
+                <progress value="{{ percent }}" max="100"></progress>
+
+                <p>{{ percent }}%</p>
+            </div>  
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="chart-card">
+    <h2>📊 今週の勉強時間</h2>
+
+    <div class="chart-container">
+    <canvas id="weeklyChart"></canvas>
+    </div>
+</div>
+<script>
+
+        const ctx = document.getElementById('weeklyChart');
+
+        const weeklyData = {{ weekly_data | tojson }};
+
+        const datasets = [];
+
+        const colors = [
+            "red",
+            "blue",
+            "green",
+            "orange",
+            "purple"
+        ];
+
+        let index = 0;
+        for (const subject in weeklyData) {
+
+            datasets.push({
+            label: subject,
+            data: weeklyData[subject],
+            backgroundColor: colors[index],
+            stack: 'stack 0'
+            });
+
+            index++;
+        }
+
+
+        
+
+
+        new Chart(ctx, {
+            type: 'bar',
+
+            data: {
+                labels: [
+                    '月',
+                    '火',
+                    '水',
+                    '木',
+                    '金',
+                    '土',
+                    '日'
+                ],
+
+                datasets: datasets
+            },
+
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+
+                scales: {
+                    x:{
+                        stacked:true
+                    },
+
+
+                    y: {
+                        staccked: true,
+                        beginAtZero: true,
+                        ticks:{
+                            stepSize: 50
+                        }
+                    }
+                }
+            }
+
+        });
+
+</script>
+<div class="chart-card">
+    <h2>📅 勉強ヒートマップ</h2>
+
+    <table class="heatmap">
+        <tr>
+            <th>月</th>
+            <th>火</th>
+            <th>水</th>
+            <th>木</th>
+            <th>金</th>
+            <th>土</th>
+            <th>日</th>
+
+        </tr>
+
+        {% for week in calendar_data %}
+        <tr>
+            {% for day in week %}
+
+                {% if day == 0 %}
+                    <td></td>
+
+                {% else %}
+                    {% set date_key = "%04d-%02d-%02d"|format(today.year, today.month, day) %}
+                    {% set minutes = daily_data.get(date_key, 0) %}
+                    <td 
+                    class="
+                    {% if minutes == 0 %}
+                        level0
+                    {% elif minutes <= 60 %}
+                        level1
+                    {% elif minutes <= 120 %}
+                        level2
+                    {% elif minutes <= 240 %}
+                        level3
+                    {% else %}
+                        level4
+                    {% endif %}
+                    "
+                    title="{{ date_key }} : {{minutes}}分"
+                    >
+                        {{day}}
+                
+                    </td>
+
+                {% endif %}
+
+            {% endfor %}
+
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+    
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>新規登録</h1>
+    <form action="{{ url_for('register') }}" method="POST">
+        <p>ユーザー名</p>
+        <input type="text" name="username" placeholder="ユーザー名">
+
+        <p>パスワード</p>
+        <input type="password" name="password" placeholder="パスワード">
+        <div class="password-rule">
+            <strong>パスワードの条件</strong>
+            <ul>
+                <li>８文字以上</li>
+                <li>英字を1文字以上含む</li>
+                <li>数字を1文字以上含む</li>
+                <li>ユーザー名と同じにしない</li>
+            </ul>           
+        </div>
+        
+        <br><br>
+
+        <button type="submit">登録</button>
+
+
+    </form>
+
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>📨 友達申請</h1>
+
+{% if requests %}
+
+{% for request in requests %}
+
+<div class="friend-card">
+
+    <h3>👤 {{ request[1] }}</h3>
+
+    <a href="{{ url_for('accept_friend', request_id=request[0]) }}">
+        <button>✅ 承認</button>
+    </a>
+
+    <a href="{{ url_for('reject_friend', request_id=request[0]) }}">
+        <button>❌ 拒否</button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p>申請はありません。</p>
+
+{% endif %}
+
+{% endblock %}

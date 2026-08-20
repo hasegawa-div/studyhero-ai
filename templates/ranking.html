@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>🏆 ランキング</h1>
+<div class="ranking-menu">
+
+<a class="{% if mode=='today' %}active{% endif %}"
+href="{{ url_for('ranking', mode='today') }}">
+📅 今日
+</a>
+
+<a class="{% if mode=='week' %}active{% endif %}"
+href="{{ url_for('ranking', mode='week') }}">
+📆 今週
+</a>
+
+<a class="{% if mode=='month' %}active{% endif %}"
+href="{{ url_for('ranking', mode='month') }}">
+🗓️ 今月
+</a>
+
+<a class="{% if mode=='all' %}active{% endif %}"
+href="{{ url_for('ranking', mode='all') }}">
+🏆 合計
+</a>
+
+</div>
+
+{% for user in ranking %}
+
+<div class="ranking-card {% if user[0] == username %}my-rank{% endif %}">
+
+    <div class="rank-icon">
+        {% if loop.index == 1 %}
+            🥇
+        {% elif loop.index == 2 %}
+            🥈
+        {% elif loop.index == 3 %}
+            🥉
+        {% else %}
+            {{ loop.index }}位
+        {% endif %}
+    </div>
+
+    <h2>{{ user[0] }}</h2>
+
+    <p>📚 {{ user[1] }}分</p>
+
+    <p>❤️ {{ user[2] }} </p>
+
+    {% if user[0] != username %}
+    <form action="{{ url_for('cheer') }}" method="POST">
+        <input type="hidden" name="to_user" value="{{ user[0] }}">
+        <button type="submit"> ❤️を押す</button>
+    </form>
+    {% endif %}
+
+</div>
+
+
+{% endfor %}
+
+{% endblock %}

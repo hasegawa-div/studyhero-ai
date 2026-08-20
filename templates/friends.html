@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>👥 友達</h1>
+
+<h2>友達を追加</h2>
+
+<form method="POST">
+    <p>ユーザー名</p>
+    <input type="text" name="friend_username" required>
+
+    <br><br>
+
+    <button type="submit">➕ 追加</button>
+</form>
+{% if message %}
+<p class="message">{{ message }}</p>
+{% endif %}
+<hr>
+
+<h2>友達一覧</h2>
+
+{% if friends %}
+    <ul>
+    {% for friend in friends %}
+    <div class="plan-card">
+        <h3>👤
+             <a href="{{ url_for('user_profile', username=friend[0]) }}">
+                {{ friend[0] }}
+            </a>
+        </h3>
+        
+        <p>📅 今日：{{ friend[1] }}分</p>
+        <p>📚 今週：{{ friend[2] }}分</p>
+        <p>🔥 {{ friend[3] }}日連続</p>
+
+        <a href="{{ url_for('remove_friend', friend_username=friend[0]) }}"
+            onclick="return confirm('友達を解除しますか？')">
+            <button>🗑️ 友達解除</button>
+        </a>
+    </div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>まだ友達がいません。</p>
+{% endif %}
+
+{% endblock %}

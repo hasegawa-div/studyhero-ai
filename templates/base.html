@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHero AI</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="sidebar" id="sidebar">
+
+    <a href="{{ url_for('dashboard') }}">🏠 ホーム</a>
+
+    <a href="{{ url_for('profile') }}">👤 プロフィール</a>
+
+    <a href="{{ url_for('add_record') }}">➕ 勉強記録追加</a>
+
+    <a href="{{ url_for('plans') }}">📅 予定一覧</a>
+
+    <a href="{{ url_for('goal') }}">🎯 目標設定</a>
+
+    <a href="{{ url_for('records') }}">📋 勉強記録一覧</a>
+
+    <a href="{{ url_for('friend_requests') }}">📨 友達申請</a>
+
+    <a href="{{ url_for('friends') }}">👥 友達</a>
+
+    <a href="{{ url_for('ranking') }}">🏆 ランキング</a>
+
+    <a href="{{ url_for('timer') }}">⏱️ タイマー</a>
+
+    <a href="{{ url_for('logout') }}">🚪 ログアウト</a>
+
+</div>
+
+<div class="menu-button" onclick="toggleMenu()">
+    ☰
+</div>
+
+<div class="main">
+
+{% block content %}
+
+{% endblock %}
+
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("sidebar").classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
