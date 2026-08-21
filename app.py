@@ -149,6 +149,13 @@ def dashboard():
     conn = get_db()
     cursor = conn.cursor()
     cursor.execute("""
+        SELECT plan
+        FROM users
+        WHERE username = ?
+    """, (session["username"],))
+
+    user_plan = cursor.fetchone()[0]
+    cursor.execute("""
     SELECT subject, minutes, done
     FROM plans
     WHERE username = ?
@@ -384,6 +391,7 @@ def dashboard():
     return render_template(
         "dashboard.html",
         username=session["username"],
+        user_plan=user_plan,
         records=records,
         total_minutes=total_minutes,
         today_minutes=today_minutes,
