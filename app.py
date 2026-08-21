@@ -1340,6 +1340,12 @@ def timer_record():
     conn.close()
 
     return redirect(url_for("dashboard"))
+@app.route("/pro")
+def pro():
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    return render_template("pro.html")
 init_db()
 
 if __name__ == "__main__":
