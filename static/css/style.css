@@ -490,3 +490,17 @@ textarea:focus{
 .password-rule li{
     margin-bottom: 4px;
 }
+.pro-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.pro-button:hover {
+    background: #2980b9;
+}
