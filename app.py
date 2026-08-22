@@ -115,6 +115,16 @@ def init_db():
         conn.commit()
     except sqlite3.OperationalError:
         pass
+    try:
+        cursor.execute("""
+            ALTER TABLE users
+            ADD COLUMN stripe_customer_id TEXT
+        """)
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass
+
+
     conn.close()
 @app.route("/")
 def home():
@@ -1403,9 +1413,27 @@ def stripe_webhook():
             cursor.execute("""
                 UPDATE users
                 SET is_pro = 1,
-                plan = 'pro'
+                    plan = 'pro',
+                    stripe_customer_id = ?
                 WHERE username = ?
             """, (username,))
+
+            conn.commit()
+            conn.close()
+        elif event["type"] == "customer.subscription.deleted":
+            subscription = event["data"]["object"]
+
+            customer_id = subscription.customer
+
+            conn = get_db()
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                UPDATE users
+                SET is_pro = 0,
+                    plan = 'free'
+                WHERE stripe_customer_id = ?
+            """, (customer_id,))
 
             conn.commit()
             conn.close()
