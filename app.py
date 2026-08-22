@@ -1402,7 +1402,8 @@ def stripe_webhook():
 
             cursor.execute("""
                 UPDATE users
-                SET is_pro = 1
+                SET is_pro = 1,
+                plan = 'pro'
                 WHERE username = ?
             """, (username,))
 
