@@ -108,8 +108,13 @@ def init_db():
         """)
     except:
         pass
-
-    conn.commit()
+    try:
+        cursor.execute("""
+            ALTER TABLE users ADD COLUMN is_pro INTEGER DEFAULT 0
+        """)
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass
     conn.close()
 @app.route("/")
 def home():
@@ -1356,18 +1361,55 @@ def create_checkout_session():
         return redirect(url_for("login"))
 
     checkout_session = stripe.checkout.Session.create(
-        mode="subscription",
-        line_items=[
-            {
-                "price": "price_1U75kK0hpDTUBRoZlRe9OXPo",
-                "quantity": 1
-            }
-        ],
-        success_url=url_for("dashboard", _external=True),
-        cancel_url=url_for("pro", _external=True)
+         mode="subscription",
+                client_reference_id=session["username"],
+                line_items=[
+                    {
+                        "price": "price_1U75kK0hpDTUBRoZlRe9OXPo",
+                        "quantity": 1
+                    }
+                ],
+                success_url=url_for("dashboard", _external=True),
+                cancel_url=url_for("pro", _external=True)
     )
 
     return redirect(checkout_session.url, code=303)
+@app.route("/stripe-webhook", methods=["POST"])
+def stripe_webhook():
+    payload = request.data
+    sig_header = request.headers.get("Stripe-Signature")
+    webhook_secret = os.environ.get("STRIPE_WEBHOOK_SECRET")
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload,
+            sig_header,
+            webhook_secret
+        )
+    except ValueError:
+        return "Invalid payload", 400
+    except stripe.error.SignatureVerificationError:
+        return "Invalid signature", 400
+
+    if event["type"] == "checkout.session.completed":
+        checkout_session = event["data"]["object"]
+
+        username = checkout_session.get("client_reference_id")
+
+        if username:
+            conn = get_db()
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                UPDATE users
+                SET is_pro = 1
+                WHERE username = ?
+            """, (username,))
+
+            conn.commit()
+            conn.close()
+
+    return "success", 200
 init_db()
 
 if __name__ == "__main__":
