@@ -157,13 +157,13 @@ button:active{
     top: 0;
     left: -250px;      /* 最初は隠す */
     width: 250px;
-    height: 100vh;
+    height: 100%;
     background: #2c3e50;
     transition: 0.3s;
     padding-top: 70px;
     z-index: 1000;
 
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
 }
 
