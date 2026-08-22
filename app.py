@@ -7,9 +7,12 @@ import os
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 import re
+import stripe
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
+
+stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
 
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
@@ -1346,6 +1349,25 @@ def pro():
         return redirect(url_for("login"))
 
     return render_template("pro.html")
+@app.route("/create_checkout_session")
+def create_checkout_session():
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    checkout_session = stripe.checkout.Session.create(
+        mode="subscription",
+        line_items=[
+            {
+                "price": "price_1U75kK0hpDTUBRoZlRe9OXPo",
+                "quantity": 1
+            }
+        ],
+        success_url=url_for("dashboard", _external=True),
+        cancel_url=url_for("pro", _external=True)
+    )
+
+    return redirect(checkout_session.url, code=303)
 init_db()
 
 if __name__ == "__main__":
