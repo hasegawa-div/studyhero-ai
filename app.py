@@ -1416,27 +1416,27 @@ def stripe_webhook():
                     plan = 'pro',
                     stripe_customer_id = ?
                 WHERE username = ?
-            """, (username,))
+            """, (customer_id, username,))
 
             conn.commit()
             conn.close()
-        elif event["type"] == "customer.subscription.deleted":
-            subscription = event["data"]["object"]
+    elif event["type"] == "customer.subscription.deleted":
+        subscription = event["data"]["object"]
 
-            customer_id = subscription.customer
+        customer_id = subscription.customer
 
-            conn = get_db()
-            cursor = conn.cursor()
+        conn = get_db()
+        cursor = conn.cursor()
 
-            cursor.execute("""
-                UPDATE users
-                SET is_pro = 0,
-                    plan = 'free'
-                WHERE stripe_customer_id = ?
-            """, (customer_id,))
+        cursor.execute("""
+            UPDATE users
+            SET is_pro = 0,
+                plan = 'free'
+            WHERE stripe_customer_id = ?
+        """, (customer_id,))
 
-            conn.commit()
-            conn.close()
+        conn.commit()
+        conn.close()
 
     return "success", 200
 init_db()
