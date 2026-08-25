@@ -1404,8 +1404,8 @@ def stripe_webhook():
     if event["type"] == "checkout.session.completed":
         checkout_session = event["data"]["object"]
 
-        username = checkout_session.get("client_reference_id")
-        custom_id = checkout_session.get("customer")
+        username = checkout_session.client_reference_id
+        custom_id = checkout_session.customer
 
         if username and customer_id:
             conn = get_db()
@@ -1424,7 +1424,7 @@ def stripe_webhook():
     elif event["type"] == "customer.subscription.deleted":
         subscription = event["data"]["object"]
 
-        customer_id = subscription.get("customer")
+        customer_id = subscription.customer
         if customer_id:
             conn = get_db()
             cursor = conn.cursor()
