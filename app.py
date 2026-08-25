@@ -1405,7 +1405,7 @@ def stripe_webhook():
         checkout_session = event["data"]["object"]
 
         username = checkout_session.client_reference_id
-        custom_id = checkout_session.customer
+        customer_id = checkout_session.customer
 
         if username and customer_id:
             conn = get_db()
