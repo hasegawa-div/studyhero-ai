@@ -7,6 +7,9 @@
 {% else %}
     <p>🆓 Freeプラン</p>
 {% endif %}
+
+{% if user_plan == "pro" %}
+
 <div class="ai-card">
 
     <div class="ai-character">
@@ -17,6 +20,21 @@
     </div>
 
 </div>
+
+{% else %}
+
+<div class="ai-card">
+    <div class="ai-character">
+        🔒
+    </div>
+    <div calss="ai-message">
+        <h3>AIアドバイスはPro限定</h3>
+        <p>ProプランにするとAIによる学習アドバイスが利用できます！</p>
+        <a href="{{ url_for('pro') }}">⭐ Proにアップグレード</a>
+    </div>
+</div>
+
+{% endif %}
 <h2>📅 今日の予定</h2>
 
 {% if today_plans %}
@@ -120,11 +138,13 @@
         </div>
     </div>
 </div>
+{% if user_plan == "pro" %}
+
 <div class="chart-card">
     <h2>📊 今週の勉強時間</h2>
 
     <div class="chart-container">
-    <canvas id="weeklyChart"></canvas>
+        <canvas id="weeklyChart"></canvas>
     </div>
 </div>
 <script>
@@ -188,7 +208,7 @@
 
 
                     y: {
-                        staccked: true,
+                        stacked: true,
                         beginAtZero: true,
                         ticks:{
                             stepSize: 50
@@ -200,6 +220,17 @@
         });
 
 </script>
+
+{% else %}
+<div class="chart-card">
+   <h2>🔒 📊 今週の勉強時間</h2>
+    <p>勉強時間グラフはProプラン限定です。</p>
+    <a href="{{ url_for('pro') }}">⭐ Proにアップグレード</a> 
+</div>
+
+{% endif %}
+
+{% if user_plan == "pro" %}
 <div class="chart-card">
     <h2>📅 勉強ヒートマップ</h2>
 
@@ -254,5 +285,19 @@
         {% endfor %}
     </table>
 </div>
+
+{% else %}
+
+<div class="chart-card">
+    <h2>🔒 📅 勉強ヒートマップ</h2>
+
+    <p>勉強ヒートマップはProプラン限定です。</p>
+
+    <a href="{{ url_for('pro') }}">
+        ⭐ Proにアップグレード
+    </a>
+</div>
+
+{% endif %}
     
 {% endblock %}
