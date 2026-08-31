@@ -35,6 +35,16 @@
 </div>
 
 {% endif %}
+{% if user_plan != "pro" %}
+
+<div class="ad-card">
+    <p>📢 広告</p>
+    <div class="ad-placeholder">
+        広告スペース
+    </div>
+</div>
+
+{% endif %}
 <h2>📅 今日の予定</h2>
 
 {% if today_plans %}
