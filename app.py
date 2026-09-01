@@ -1440,6 +1440,18 @@ def stripe_webhook():
             conn.close()
 
     return "success", 200
+@app.route("/robots.txt")
+def robots_txt():
+    return """
+User-agent: *
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Google-Display-Ads-Bot
+Allow: /
+""", 200, {"Content-Type": "text/plain"}
 init_db()
 
 if __name__ == "__main__":
