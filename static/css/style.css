@@ -504,3 +504,17 @@ textarea:focus{
 .pro-button:hover {
     background: #2980b9;
 }
+/* =========================
+   StudyHero Pro
+========================= */
+
+.pro-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.pro-container li {
+    list-style: none;
+    margin: 10px 0;
+}
