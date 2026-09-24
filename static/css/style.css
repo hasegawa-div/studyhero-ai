@@ -742,3 +742,127 @@ main > section:last-child button:hover {
         max-width: 300px;
     }
 }
+/* =========================
+   ログインページ
+   ========================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    box-sizing: border-box;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.login-card h1 {
+    text-align: center;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.login-card h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.login-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.login-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-card label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    margin-top: 15px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.login-card button {
+    width: 100%;
+    margin: 25px 0 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    background: #1d4ed8;
+}
+
+.login-links {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.login-links p {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.login-links a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+.login-card .flash {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #fee2e2;
+    color: #b91c1c;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+
+    .login-card {
+        padding: 30px 20px;
+    }
+
+    .login-card h1 {
+        font-size: 28px;
+    }
+}

@@ -4,39 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ログイン</title>
+
+     <meta name="description"
+          content="StudyHero AIにログインして、勉強時間や学習予定を管理しましょう。">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>StudyHero AI</h1>
-    <p>アカウントをお持ちでない方は
-        <a href="{{ url_for('register') }}">新規登録はこちら</a>
-    </p>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p class="flash">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    <form action="{{ url_for('login') }}" method="POST">
-        <p>ユーザー名</p>
+    <main class="login-page">
+        <section class="login-card">
 
-        <input type="text"
-        name="username"
-        placeholder="ユーザー名を入力">
+            <h1>StudyHero AI</h1>
 
-        <p>パスワード</p>
+            <h2>ログイン</h2>
+
+            <p class="login-description">
+                StudyHero AIにログインして、<br>
+                毎日の勉強を記録しましょう。
+            </p>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="flash">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('login') }}" method="POST">
+                <label for="username">ユーザー名</label>
+
+                <input 
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="ユーザー名を入力"
+                    required
+                >
+                
+                <label for="password">パスワード</label>
         
-        <input 
-        type="password"
-        name="password"
-        placeholder="パスワードを入力">
+                <input 
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="パスワードを入力"
+                    required
+                >
 
-        <br><br>
 
-        <button type="submit">ログイン</button>
+                <button type="submit">
+                    ログイン
+                </button>
 
-    </form>
+            </form>
+            <div class="login-links">
+                 <p>
+                    アカウントをお持ちでない方
+                </p>
+
+                <a href="{{ url_for('register') }}">
+                    新規登録はこちら
+                </a>
+
+                <br>
+
+                <a href="{{ url_for('index') }}">
+                    ← トップページに戻る
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
     
 </body>
 </html>
