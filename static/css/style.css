@@ -866,3 +866,29 @@ main > section:last-child button:hover {
         font-size: 28px;
     }
 }
+/* =========================
+   新規登録ページ
+   ========================= */
+
+.password-rule {
+    margin-top: 15px;
+    padding: 15px 18px;
+    background: #f8faff;
+    border: 1px solid #e0e7ff;
+    border-radius: 10px;
+    color: #555;
+    font-size: 14px;
+}
+
+.password-rule strong {
+    color: #2563eb;
+}
+
+.password-rule ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+}
+
+.password-rule li {
+    margin: 3px 0;
+}

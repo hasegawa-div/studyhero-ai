@@ -3,41 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新規登録</title>
+
+    <title>新規登録｜StudyHero AI</title>
+
+    <meta name="description"
+          content="StudyHero AIのアカウントを作成して、勉強時間や学習予定の管理を始めましょう。">
 
     <meta name="google-adsense-account" content="ca-pub-6288854483652181">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6288854483652181"
-    crossorigin="anonymous"></script>
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6288854483652181"
+        crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <h1>新規登録</h1>
-    <form action="{{ url_for('register') }}" method="POST">
-        <p>ユーザー名</p>
-        <input type="text" name="username" placeholder="ユーザー名">
 
-        <p>パスワード</p>
-        <input type="password" name="password" placeholder="パスワード">
-        <div class="password-rule">
-            <strong>パスワードの条件</strong>
-            <ul>
-                <li>８文字以上</li>
-                <li>英字を1文字以上含む</li>
-                <li>数字を1文字以上含む</li>
-                <li>ユーザー名と同じにしない</li>
-            </ul>           
-        </div>
-        
-        <br><br>
+    <main class="login-page">
 
-        <button type="submit">登録</button>
+        <section class="login-card">
+
+            <h1>📚 StudyHero AI</h1>
+
+            <h2>新規登録</h2>
+
+            <p class="login-description">
+                アカウントを作成して、<br>
+                毎日の勉強を記録しましょう。
+            </p>
 
 
-    </form>
+            <form action="{{ url_for('register') }}" method="POST">
 
-    
+                <label for="username">ユーザー名</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="ユーザー名を入力"
+                    required
+                >
+
+
+                <label for="password">パスワード</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="パスワードを入力"
+                    required
+                >
+
+
+                <div class="password-rule">
+
+                    <strong>パスワードの条件</strong>
+
+                    <ul>
+                        <li>8文字以上</li>
+                        <li>英字を1文字以上含む</li>
+                        <li>数字を1文字以上含む</li>
+                        <li>ユーザー名と同じにしない</li>
+                    </ul>
+
+                </div>
+
+
+                <button type="submit">
+                    アカウントを作成
+                </button>
+
+            </form>
+
+
+            <div class="login-links">
+
+                <p>
+                    すでにアカウントをお持ちの方
+                </p>
+
+                <a href="{{ url_for('login') }}">
+                    ログインはこちら
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </body>
 </html>
