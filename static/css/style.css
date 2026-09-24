@@ -593,7 +593,32 @@ main > section:nth-child(2) {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
+/* できることカードを見やすくする */
+main > section:nth-child(2) article {
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
+}
 
+main > section:nth-child(2) article h3 {
+    font-size: 23px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+main > section:nth-child(2) article p {
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+/* カードを少し浮かせる */
+main > section:nth-child(2) article:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.10);
+}
 main > section:nth-child(2) > h2 {
     grid-column: 1 / -1;
 }
