@@ -1440,6 +1440,13 @@ def stripe_webhook():
             conn.close()
 
     return "success", 200
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+@app.route("/terms")
+def terms():
+    return render_template("terms.html")
 @app.route("/robots.txt")
 def robots_txt():
     return """
