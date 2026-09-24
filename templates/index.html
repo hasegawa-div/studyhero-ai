@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>studyHero AI</title>
+    <title>studyHero AI|勉強時間を記録・管理する学習アプリ</title>
 
+    <meta name="description"
+          content="StudyHero AIは、勉強時間の記録や学習予定、目標管理、学習状況の確認などができる学習管理アプリです。">
     <meta name="google-adsense-account" content="ca-pub-6288854483652181">
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -13,13 +15,135 @@
     crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Hello, StudyHero!</h1>
-    <p>勉強アプリへようこそ！</p>
-    <a href="{{ url_for('login') }}">
-        <button>勉強を始める</button>
-    </a>
+    <main>
 
-   
+        <!-- ヒーロー部分 -->
+        <section>
+            <h1>StudyHero AI</h1>
+
+            <h2>毎日の勉強を記録して、学習を続けよう</h2>
+
+            <p>
+                StudyHero AIは、毎日の勉強時間を記録・管理するための
+                学習管理アプリです。
+            </p>
+
+            <p>
+                勉強した時間を記録するだけでなく、
+                学習予定や目標を管理し、自分の学習状況を確認できます。
+            </p>
+
+            <a href="{{ url_for('login') }}">
+                <button>勉強を始める</button>
+            </a>
+        </section>
+
+
+        <!-- StudyHero AIでできること -->
+        <section>
+
+            <h2>StudyHero AIでできること</h2>
+
+            <article>
+                <h3>📚 勉強時間を記録</h3>
+
+                <p>
+                    科目や勉強時間を記録して、
+                    これまでの学習量を確認できます。
+                </p>
+            </article>
+
+
+            <article>
+                <h3>📅 勉強予定を管理</h3>
+
+                <p>
+                    これから勉強する内容を予定として登録し、
+                    計画的に学習を進めることができます。
+                </p>
+            </article>
+
+
+            <article>
+                <h3>🎯 科目ごとの目標</h3>
+
+                <p>
+                    科目ごとに目標を設定して、
+                    自分の学習状況や達成度を確認できます。
+                </p>
+            </article>
+
+
+            <article>
+                <h3>📊 学習状況を確認</h3>
+
+                <p>
+                    勉強時間のグラフや記録を確認して、
+                    自分がどのくらい勉強しているのかを振り返れます。
+                </p>
+            </article>
+
+
+            <article>
+                <h3>🔥 継続して勉強する</h3>
+
+                <p>
+                    勉強記録や連続学習などを確認しながら、
+                    毎日の学習習慣づくりに役立てることができます。
+                </p>
+            </article>
+
+
+            <article>
+                <h3>🤖 AI学習アドバイス</h3>
+
+                <p>
+                    StudyHero AIでは、学習状況をもとにした
+                    AIによる学習アドバイスを利用できます。
+                </p>
+            </article>
+
+        </section>
+
+
+        <!-- StudyHero AIの使い方 -->
+        <section>
+
+            <h2>StudyHero AIの使い方</h2>
+
+            <ol>
+                <li>アカウントを作成します。</li>
+                <li>ログインして勉強する科目を登録します。</li>
+                <li>勉強した時間を記録します。</li>
+                <li>学習状況を確認しながら勉強を続けます。</li>
+            </ol>
+
+        </section>
+
+
+        <!-- 最後の案内 -->
+        <section>
+
+            <h2>勉強を記録するところから始めよう</h2>
+
+            <p>
+                StudyHero AIを使って、
+                毎日の勉強を記録し、自分の学習状況を確認してみましょう。
+            </p>
+
+            <a href="{{ url_for('login') }}">
+                <button>ログインして始める</button>
+            </a>
+
+            <a href="{{ url_for('register') }}">
+                <button>新規登録</button>
+            </a>
+
+        </section>
+
+    </main>
+
+
     
 </body>
 </html>
