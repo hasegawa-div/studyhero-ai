@@ -907,3 +907,159 @@ main > section:last-child button:hover {
 .site-footer a:hover {
     text-decoration: underline;
 }
+
+/* 学習ガイド */
+.guide-page {
+    max-width: 900px;
+    text-align: left;
+}
+
+.guide-page > p:first-child,
+.breadcrumbs {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.guide-header {
+    padding: 36px 0 24px;
+}
+
+.guide-header h1,
+.article-page h1 {
+    margin: 0 0 16px;
+    color: #1e3a8a;
+    font-size: clamp(32px, 6vw, 46px);
+    line-height: 1.35;
+}
+
+.guide-header > p:last-child {
+    max-width: 760px;
+    color: #475569;
+    font-size: 18px;
+}
+
+.eyebrow {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.guide-list {
+    display: grid;
+    gap: 20px;
+}
+
+.guide-card,
+.example-box,
+.worksheet {
+    padding: 24px;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    background: #fff;
+}
+
+.guide-card h2 {
+    margin: 0 0 8px;
+    font-size: 23px;
+}
+
+.guide-card h2 a,
+.article-page a,
+.text-link {
+    color: #1d4ed8;
+}
+
+.guide-card p {
+    font-size: 16px;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+.article-page article {
+    padding: 0 4px;
+}
+
+.article-page h2 {
+    margin: 42px 0 14px;
+    font-size: 25px;
+}
+
+.article-page p,
+.article-page li {
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+.article-page li {
+    margin: 8px 0;
+}
+
+.article-page ol {
+    padding-left: 28px;
+}
+
+.example-box,
+.worksheet {
+    margin: 22px 0;
+    background: #f8faff;
+}
+
+.example-box p:last-child,
+.worksheet p:last-child {
+    margin-bottom: 0;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+.table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 15px;
+}
+
+.table-wrap th,
+.table-wrap td {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    text-align: left;
+    vertical-align: top;
+}
+
+.table-wrap th {
+    background: #eff6ff;
+}
+
+.guide-note {
+    color: #64748b;
+    font-size: 14px !important;
+}
+
+@media (max-width: 700px) {
+    .guide-header {
+        padding: 24px 0 16px;
+    }
+
+    .guide-header > p:last-child,
+    .article-page p,
+    .article-page li {
+        font-size: 16px;
+    }
+
+    .guide-card,
+    .example-box,
+    .worksheet {
+        padding: 18px;
+    }
+
+    .table-wrap table {
+        min-width: 620px;
+    }
+}
